@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
+import 'fomantic-ui-less/semantic.less';
 import {Button} from 'semantic-ui-react';
 
 

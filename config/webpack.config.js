@@ -1,3 +1,29 @@
+
+
+
+// module.exports = {
+//   // ...
+//   resolve: {
+//     alias: {
+//       "../../theme.config$": path.join(__dirname, "/semantic-ui/theme.config"),
+//       "../semantic-ui/site": path.join(__dirname, "/semantic-ui/site")
+//     }
+//   },
+//   module: {
+//     rules: [
+//       // other files' rules
+//       // less
+//       {
+//         use: MiniCssExtractPlugin.extract({
+//           fallback: "style-loader",
+//           use: ["css-loader", "less-loader"]
+//         }),
+//         test: /\.less$/
+//       }
+//     ]
+//   }
+// };
+
 'use strict';
 
 const fs = require('fs');
@@ -308,6 +334,8 @@ module.exports = function(webpackEnv) {
         ...(isEnvProductionProfile && {
           'react-dom$': 'react-dom/profiling',
           'scheduler/tracing': 'scheduler/tracing-profiling',
+          "../../theme.config$": path.join(__dirname, "../semantic-ui/theme.config"),
+          "../semantic-ui/site": path.join(__dirname, "../semantic-ui/site")
         }),
         ...(modules.webpackAliases || {}),
       },
@@ -511,6 +539,14 @@ module.exports = function(webpackEnv) {
                 name: 'static/media/[name].[hash:8].[ext]',
               },
             },
+            {
+              use: [
+                MiniCssExtractPlugin.loader,
+                "css-loader",
+                "less-loader"
+              ],
+              test: /\.less$/
+            }
             // ** STOP ** Are you adding a new loader?
             // Make sure to add the new loader(s) before the "file" loader.
           ],
@@ -678,3 +714,5 @@ module.exports = function(webpackEnv) {
     performance: false,
   };
 };
+
+
